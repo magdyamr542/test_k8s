@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+spec:
+  selector:
+    matchLabels:
+      app: server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: my-server
+          image: docker.io/library/goapp:latest
+          imagePullPolicy: IfNotPresent
+          # define env variables for the pods
+          env:
+            - name: SERVER_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config # the name of the config map
+                  key: server_version
+
+            - name: API_PREFIX
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: api_prefix
+
+            - name: DYNAMIC
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: dynamic
+          # this serves as documentation only
+          ports:
+            - containerPort: 1234
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb
+  labels:
+    app: lb
+spec:
+  ports:
+    # the port other pods can use to reach the service
+    - port: 4000
+      protocol: TCP
+      # the port the service proxies the requests to. this should match the port the backend listens on
+      targetPort: 1234
+  selector:
+    # this is what is used to select the pods that the service proxies he requests to.
+    # this label should match the pod's labels
+    app: server
