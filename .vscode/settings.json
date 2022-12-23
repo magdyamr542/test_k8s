@@ -2,6 +2,7 @@
   "yaml.schemas": {
     "kubernetes://schema/v1@configmap": "file:///home/amr/Documents/projects/private/test-k8s/lb/app/configMap.k8s.yaml",
     "kubernetes://schema/v1@service": "file:///home/amr/Documents/projects/private/test-k8s/lb/app/service.k8s.yaml",
-    "kubernetes://schema/apps/v1@deployment": "file:///home/amr/Documents/projects/private/test-k8s/lb/app/app-backend.k8s.yaml"
+    "kubernetes://schema/apps/v1@deployment": "file:///home/amr/Documents/projects/private/test-k8s/lb/app/app-backend.k8s.yaml",
+    "kubernetes://schema/v1@pod": "file:///home/amr/Documents/projects/private/test-k8s/lb/caller/caller-pod.k8s.yaml"
   }
 }
