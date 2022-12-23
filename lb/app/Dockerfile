@@ -4,10 +4,9 @@ WORKDIR /app
 COPY go.mod ./
 RUN go mod download
 COPY *.go ./
-RUN go build -o /app
+RUN CGO_ENABLED=0 go build -o /app
 
 ## Deploy
-FROM gcr.io/distroless/base-debian10
+FROM alpine:latest
 COPY --from=builder /app /
-USER nonroot:nonroot
 ENTRYPOINT [ "/app" ] 

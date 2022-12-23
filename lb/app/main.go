@@ -38,6 +38,7 @@ func main() {
 		w.Write([]byte(fmt.Sprintf("Dynamic value %s\n", dynamicValue)))
 	})
 
+	fmt.Printf("Current node %v\n", seed)
 	fmt.Printf("Server is up on port 1234\n")
 	fmt.Printf("Api accessible under '<host>:<port>%s'\n", apiPrefix)
 	http.ListenAndServe(":1234", nil)
