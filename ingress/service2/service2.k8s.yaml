@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service2
+spec:
+  selector:
+    matchLabels:
+      app: service2
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: service2
+    spec:
+      containers:
+        - name: service2
+          image: docker.io/library/service2:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2
+  labels:
+    app: service2
+spec:
+  ports:
+    # the port other pods can use to reach the service
+    - port: 4000
+      protocol: TCP
+      # the port the service proxies the requests to. this should match the port the backend listens on
+      targetPort: 1234
+  selector:
+    # this is what is used to select the pods that the service proxies he requests to.
+    # this label should match the pod's labels
+    app: service2

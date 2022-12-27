@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress # in order for this to work, an ingress controller should be already deployed.
+# this was done with helm following this guide (https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
+metadata:
+  name: gateway # the gateway is a reverse proxy which delegates requests to other backends (services usually)
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /service1(/|$)(.*) # any chars captured by (.*) are assigned to $2. we strip here /service1/ from the request proxied to the backend
+            pathType: Prefix
+            backend:
+              service:
+                name: service1
+                port:
+                  number: 4000
+          - path: /service2(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: service2
+                port:
+                  number: 4000
