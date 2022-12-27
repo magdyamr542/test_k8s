@@ -1,0 +1,8 @@
+go 1.19
+
+use (
+	./ingress/service1
+	./ingress/service2
+	./lb/app
+	./lb/caller
+)
