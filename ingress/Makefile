@@ -27,4 +27,13 @@ build2:
 cleanup:  
 	docker system prune -f
 
+createIngressController:  
+	helm upgrade --install ingress-nginx ingress-nginx \
+	--repo https://kubernetes.github.io/ingress-nginx \
+	--namespace ingress-nginx --create-namespace
+
+deleteIngressController:  
+	kubectl delete all --all -n ingress-nginx
+	kubectl delete namespaces ingress-nginx
+
 .PHONY: up kill restartDeployment build cleanup
