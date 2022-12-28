@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: storage-pod
+spec:
+  volumes:
+    - name: the-storage
+      persistentVolumeClaim:
+        claimName: storage-pvc # we use a pvc to obtain a pv. a pvc is an abstraction for a volume request
+        # a pv is an abstraction for a volume resource
+  containers:
+    - name: nginx-server
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: http-server
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html" # the path where we want to mount the volume in the pod
+          name: the-storage # we reference the volume by its name
+      resources:
+        limits:
+          memory: 512Mi
+          cpu: "1"
