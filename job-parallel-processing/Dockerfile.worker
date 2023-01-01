@@ -1,0 +1,13 @@
+FROM alpine:3.17.0
+RUN apk update
+RUN apk add --no-cache \
+	python3 \
+	rabbitmq-c-utils \
+	bind-tools \
+	curl \
+	ca-certificates
+
+RUN ln -sf $(which python3) /usr/bin/python
+COPY ./worker.py /worker.py
+RUN chmod +x /worker.py
+CMD  /usr/bin/amqp-consume --url=$BROKER_URL -q $QUEUE -c 1 /worker.py

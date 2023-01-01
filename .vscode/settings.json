@@ -1,10 +1,17 @@
 {
   "yaml.schemas": {
     "kubernetes://schema/v1@configmap": "file:///home/amr/Documents/projects/private/test-k8s/lb/app/configMap.k8s.yaml",
-    "kubernetes://schema/v1@service": "file:///home/amr/Documents/projects/private/test-k8s/lb/app/service.k8s.yaml",
-    "kubernetes://schema/apps/v1@deployment": "file:///home/amr/Documents/projects/private/test-k8s/lb/app/app-backend.k8s.yaml",
+    "kubernetes://schema/v1@service": [
+      "file:///home/amr/Documents/projects/private/test-k8s/lb/app/service.k8s.yaml",
+      "file:///home/amr/Documents/projects/private/test-k8s/job-parallel-processing/rabbitmq-service.k8s.yaml"
+    ],
+    "kubernetes://schema/apps/v1@deployment": [
+      "file:///home/amr/Documents/projects/private/test-k8s/lb/app/app-backend.k8s.yaml"
+    ],
     "kubernetes://schema/v1@pod": "file:///home/amr/Documents/projects/private/test-k8s/lb/caller/caller-pod.k8s.yaml",
     "kubernetes://schema/networking.k8s.io/v1@ingress": "file:///home/amr/Documents/projects/private/test-k8s/ingress/ingress.k8s.yaml",
-    "kubernetes://schema/v1@persistentvolume": "file:///home/amr/Documents/projects/private/test-k8s/volumes/volumes.k8s.yaml"
+    "kubernetes://schema/v1@persistentvolume": "file:///home/amr/Documents/projects/private/test-k8s/volumes/volumes.k8s.yaml",
+    "kubernetes://schema/v1@replicationcontroller": "file:///home/amr/Documents/projects/private/test-k8s/job-parallel-processing/rabbitmq-replica-set.k8s.yaml",
+    "kubernetes://schema/batch/v1@job": "file:///home/amr/Documents/projects/private/test-k8s/job-parallel-processing/worker-job.k8s.yaml"
   }
 }
